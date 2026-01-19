@@ -23,6 +23,7 @@ import static edu.wpi.first.units.Units.*;
  * Provides PID based velocity control for a CTRE motor using TalonFX controller.
  * Configures controller with PID parameters and runs the control loop on the
  * controller. Provides voltage, torque and Motion Magic (voltage) control methods.
+ * Torque control requires Phoenix Pro license.
  * Set any parameters before calling setDesiredRPS or setDesiredRPM. Automatically
  * stops motor when robot disabled. Default parameters work with Falcon 500 and
  * should be close for Kraken. See CTRE and WPILib doc for information about the
@@ -182,7 +183,7 @@ public class TalonFXVelocityController extends SubsystemBase {
     }
 
     /**
-     * Set desired motor velocity and starts motor.
+     * Set desired motor velocity and start motor.
      * @param rps Velocity in rotations per second.
      */
     public void desiredRPS(double rps)
@@ -193,7 +194,7 @@ public class TalonFXVelocityController extends SubsystemBase {
     }
 
     /**
-     * Set desired motor velocity and starts motor.
+     * Set desired motor velocity and start motor.
      * @param rpm Velocity in rotations per minute.
      */
     public void desiredRPM(double rpm) {
@@ -248,8 +249,8 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kP value for voltage PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
-     * @param kP The proportional value.
+     * call desired*() to restart the PID control with the new value.
+     * @param kP The proportional value. Voltage applied for error of 1 rps.
      * @return Itself
      */
     public TalonFXVelocityController withVoltagekP(double kP) {
@@ -260,7 +261,7 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kI value for voltage PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
+     * call desired*() to restart the PID control with the new value.
      * @param kI The integral value.
      * @return Itself
      */
@@ -272,7 +273,7 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kD value for voltage PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
+     * call desired*() to restart the PID control with the new value.
      * @param kD The derivative value.
      * @return Itself
      */
@@ -284,8 +285,8 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kS value for voltage PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
-     * @param kS The static feedforward value.
+     * call desired*() to restart the PID control with the new value.
+     * @param kS The static feedforward voltage.
      * @return Itself
      */
     public TalonFXVelocityController withVoltagekS(double kS) {
@@ -296,8 +297,8 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kV value for voltage PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
-     * @param kV The ? value.
+     * call desired*() to restart the PID control with the new value.
+     * @param kV The voltage required for 1 rps velocity.
      * @return Itself
      */
     public TalonFXVelocityController withVoltagekV(double kV) {
@@ -308,9 +309,9 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kA value for voltage PID control. Only applies to Motion Magic.
-     * After changing this value call setDesired*() to restart the PID control
+     * After changing this value call desired*() to restart the PID control
      * with the new value.
-     * @param kA The ? value.
+     * @param kA The voltage for acceleration of 1 rps/s.
      * @return Itself
      */
     public TalonFXVelocityController withVoltagekA(double kA) {
@@ -321,8 +322,8 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kP value for torque PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
-     * @param kP The proportional value.
+     * call desired*() to restart the PID control with the new value.
+     * @param kP The proportional value. The amperage to apply for error of 1 rps.
      * 
      */
     public TalonFXVelocityController withTorquekP(double kP) {
@@ -333,7 +334,7 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kI value for torque PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
+     * call desired*() to restart the PID control with the new value.
      * @param kI The integral value.
      * @return Itself
      */
@@ -345,7 +346,7 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kD value for torque PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
+     * call desired*() to restart the PID control with the new value.
      * @param kD The derivative value.
      * 
      */
@@ -357,8 +358,8 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /**
      * Set the kS value for torque PID control. After changing this value
-     * call setDesired*() to restart the PID control with the new value.
-     * @param kS The static feedforward value.
+     * call desired*() to restart the PID control with the new value.
+     * @param kS The static feedforward voltage.
      * @return Itself
      */
     public TalonFXVelocityController withTorquekS(double kS) {
