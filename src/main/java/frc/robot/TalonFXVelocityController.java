@@ -98,8 +98,6 @@ public class TalonFXVelocityController extends SubsystemBase {
         configs.Slot1.kP = slot1_kP;
         configs.Slot1.kI = slot1_kI;
         configs.Slot1.kD = slot1_kD;
-        
-        configs.MotorOutput.withInverted(invertedValue).withNeutralMode(neutralModeValue);
 
         // Peak output of 40 A
         configs.TorqueCurrent.withPeakForwardTorqueCurrent(Amps.of(40))
@@ -112,6 +110,8 @@ public class TalonFXVelocityController extends SubsystemBase {
         var motionMagicConfigs = configs.MotionMagic;
         motionMagicConfigs.MotionMagicAcceleration = 400; // Target acceleration of 400 rps/s (0.25 seconds to max)
         motionMagicConfigs.MotionMagicJerk = 4000; // Target jerk of 4000 rps/s/s (0.1 seconds)
+        
+        configs.MotorOutput.withInverted(invertedValue).withNeutralMode(neutralModeValue);
 
         configs.Feedback.withSensorToMechanismRatio(1 / driveRatio);
         
