@@ -157,31 +157,29 @@ gradle-app.setting
 .project
 .settings/
 bin/
+imgui.ini
 
-# IntelliJ
-*.iml
-*.ipr
-*.iws
-.idea/
-out/
+# Characterization projects
+Drive Characterization/characterization-project/
+Shooter Characterization/characterization-project/
 
-# Fleet
-.fleet
+# Added simgui files back due to 2026 changes and cleanup.
+# Want everyone to start fresh. May exclude them again later
+# to not overwrite individual programmer changes to the sim gui.
+# Misc temp files
+logging/logging.*.*
+logs/*
+#simgui*
+*.wpilog
 
-# Simulation GUI and other tools window save file
+# added just in case the above simgui* isn't catching them:
+#simgui-window.json
+#simgui.json
+
+
+# Backups
+*.zip
+
 networktables.json
-simgui.json
-*-window.json
-
-# Simulation data log directory
-logs/
-
-# Folder that has CTRE Phoenix Sim device config storage
 ctre_sim/
-
-# clangd
-/.cache
-compile_commands.json
-
-# Eclipse generated file for annotation processors
-.factorypath
+logging/logging.txt*

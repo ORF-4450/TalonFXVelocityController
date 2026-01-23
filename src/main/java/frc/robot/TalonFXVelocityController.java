@@ -13,8 +13,9 @@ import Team4450.Lib.Util;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotState;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import frc.robot.sim.PhoenixPhysicsSim;
 
 import static edu.wpi.first.units.Units.*;
@@ -54,17 +55,17 @@ public class TalonFXVelocityController extends SubsystemBase {
 
     /* Voltage-based velocity requires a velocity feed forward to account for the back-emf of the motor */
     private double  slot0_kS = 0.1;   // To account for friction, add 0.1 V of static feedforward
-    private double  slot0_kV = 0.122; // Kraken X60 is a 500 kV motor, 500 rpm per V = 8.333 rps per V, 1/8.33 = 0.12 volts / rotation per second
+    private double  slot0_kV = 0.11;  // Kraken X60 is a 500 kV motor, 500 rpm per V = 8.333 rps per V, 1/8.33 = 0.12 volts / rotation per second
     private double  slot0_kA = 0.01;  // An acceleration of 1 rps/s requires 0.01 V output    
-    private double  slot0_kP = 0.20;  // An error of 1 rotation per second results in 0.20 V output
+    private double  slot0_kP = 0.30;  // An error of 1 rotation per second results in 0.30 V output
     private double  slot0_kI = 0;     // No output for integrated error
     private double  slot0_kD = 0;     // No output for error derivative
 
     // Torque-based velocity does not require a velocity feed forward, as torque will accelerate the rotor up to the desired velocity by itself */
-    private double  slot1_kS = 1.3; // To account for friction, add 2.5 A of static feedforward
-    private double  slot1_kP = 5; // An error of 1 rotation per second results in 5 A output
-    private double  slot1_kI = 0; // No output for integrated error
-    private double  slot1_kD = 0; // No output for error derivative
+    private double  slot1_kS = 1.3;   // To account for friction, add 2.5 A of static feedforward
+    private double  slot1_kP = 5;     // An error of 1 rotation per second results in 5 A output
+    private double  slot1_kI = 0;     // No output for integrated error
+    private double  slot1_kD = 0;     // No output for error derivative
         
     //DoubleConsumer setkP = kP -> setSlot0_kP(kP);
     
@@ -75,6 +76,8 @@ public class TalonFXVelocityController extends SubsystemBase {
         Util.consoleLog("%s", this.name);
 
         SendableRegistry.addLW(this, this.name);
+
+        RobotModeTriggers.disabled().onChange(new InstantCommand(this::stop));
 
         if (RobotBase.isSimulation()) PhoenixPhysicsSim.getInstance().addTalonFX(talon, 0.001);
     }
@@ -130,11 +133,6 @@ public class TalonFXVelocityController extends SubsystemBase {
      */
     @Override
     public void periodic() {
-        // This is a lot of overhead for every scheduler loop but not sure how else to
-        // kill the loop on the TalonFX controller automatically and not rely on
-        // programmers to call stop() on this class when robot is disabled.
-
-        if (RobotState.isDisabled()) stop();
     }
 
     /**
@@ -208,7 +206,7 @@ public class TalonFXVelocityController extends SubsystemBase {
      * to reach and hold the desired rps.
      */
     private void start() {
-        Util.consoleLog("%.0f", desiredRotationsPerSecond);
+        Util.consoleLog("%.2f", desiredRotationsPerSecond);
 
         configureTalon();
         
@@ -228,6 +226,8 @@ public class TalonFXVelocityController extends SubsystemBase {
      * Stops the motor with the TalonFX controller's configured neutral mode.
      */
     public void stop() {
+        Util.consoleLog();
+
         desiredRotationsPerSecond = 0;
 
         talon.setControl(brake);

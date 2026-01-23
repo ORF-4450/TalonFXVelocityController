@@ -1,0 +1,78 @@
+{
+  "Docking": {
+    "Data": []
+  },
+  "MainWindow": {
+    "GLOBAL": {
+      "font": "Proggy Dotted",
+      "fps": "120",
+      "height": "1050",
+      "maximized": "0",
+      "style": "0",
+      "userScale": "2",
+      "width": "1920",
+      "xpos": "-1",
+      "ypos": "-1"
+    }
+  },
+  "Table": {
+    "0xE56EC1C2,4": {
+      "Column 0  Weight": "1.0000",
+      "Column 1  Weight": "1.0000",
+      "Column 2  Weight": "1.0000",
+      "Column 3  Weight": "1.0000"
+    }
+  },
+  "Window": {
+    "###/SmartDashboard/mech2d": {
+      "Collapsed": "0",
+      "Pos": "400,400",
+      "Size": "293,200"
+    },
+    "###FMS": {
+      "Collapsed": "0",
+      "Pos": "7,810",
+      "Size": "235,244"
+    },
+    "###Joysticks": {
+      "Collapsed": "0",
+      "Pos": "381,790",
+      "Size": "1156,316"
+    },
+    "###NetworkTables": {
+      "Collapsed": "0",
+      "Pos": "386,216",
+      "Size": "1125,539"
+    },
+    "###NetworkTables Info": {
+      "Collapsed": "1",
+      "Pos": "389,65",
+      "Size": "1125,217"
+    },
+    "###Other Devices": {
+      "Collapsed": "0",
+      "Pos": "1537,30",
+      "Size": "375,1042"
+    },
+    "###System Joysticks": {
+      "Collapsed": "0",
+      "Pos": "7,525",
+      "Size": "273,290"
+    },
+    "###Timing": {
+      "Collapsed": "0",
+      "Pos": "7,225",
+      "Size": "188,186"
+    },
+    "Debug##Default": {
+      "Collapsed": "0",
+      "Pos": "60,60",
+      "Size": "400,400"
+    },
+    "Robot State": {
+      "Collapsed": "0",
+      "Pos": "5,20",
+      "Size": "137,152"
+    }
+  }
+}

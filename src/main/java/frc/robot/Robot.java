@@ -4,17 +4,15 @@
 
 package frc.robot;
 
-import java.util.function.DoubleConsumer;
-
 import Team4450.Lib.*;
 
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+//import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.wpilib.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -30,13 +28,9 @@ public class Robot extends TimedRobot {
 
   private final XboxController m_joystick = new XboxController(0);
 
-  public double slot0_kP = 0.20; // An error of 1 rotation per second results in 0.20 V output
-  
-  DoubleConsumer setkP = kP -> setSlot0_kP(kP);
-
   TalonFXVelocityController   tfxController = new TalonFXVelocityController(m_fx, "Shooter")
-          .withVoltagekP(.30)
-          .withInverted(true)
+          //.withVoltagekP(.30)
+          //.withVoltagekV(.12)
           .withNeutralMode(NeutralModeValue.Brake);
 
   /**
@@ -47,6 +41,8 @@ public class Robot extends TimedRobot {
     try {
       Util.CustomLogger.setup("robot.");
     } catch (Exception e) {}  
+
+    enableLiveWindowInTest(true);
   }
 
   @Override
@@ -72,7 +68,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     if (m_joystick.getXButtonPressed()) tfxController.stop();
 
-    if (m_joystick.getBButtonPressed()) tfxController.desiredRPM(2300);
+    if (m_joystick.getBButtonPressed()) tfxController.desiredRPM(3000);
   }
 
   @Override
@@ -93,8 +89,6 @@ public class Robot extends TimedRobot {
     // telop with LW enabled. Our code displays more detailed test/debug
     // data in LW mode.
 
-    LiveWindow.enableAllTelemetry();
-
     teleopInit();
 
     CommandScheduler.getInstance().enable();
@@ -111,10 +105,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationPeriodic() {
-  }
-
-  public void setSlot0_kP(double kP) {
-    slot0_kP = kP;
   }
 }
  

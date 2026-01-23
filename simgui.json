@@ -1,0 +1,57 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon FX (v6) [10]": "Motor Controller",
+      "/SmartDashboard/mech2d": "Mechanism2d"
+    },
+    "windows": {
+      "/SmartDashboard/mech2d": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
+    "Retained Values": {
+      "open": false
+    },
+    "transitory": {
+      "LiveWindow": {
+        "TalonFXVelocityController": {
+          "Shooter(10)": {
+            "open": true
+          },
+          "open": true
+        },
+        "Ungrouped": {
+          "PhoenixVelocityTuner": {
+            "open": true
+          },
+          "open": true
+        },
+        "open": true
+      },
+      "Shuffleboard": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "open": true
+    },
+    "visible": true
+  }
+}
